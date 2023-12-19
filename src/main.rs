@@ -2,7 +2,7 @@ use notify::{RecursiveMode, Watcher, recommended_watcher};
 use std::path::Path;
 use std::sync::mpsc::channel;
 use serde::Deserialize;
-use std::fs;
+use std::{fs, thread};
 
 #[derive(Deserialize)]
 struct Config {
@@ -36,6 +36,9 @@ fn main() {
 }
 
 fn convert_image(input: &Path) {
+    let delay = std::time::Duration::from_millis(50);
+    thread::sleep(delay);
+
     let img = image::open(input).expect("Failed to open image");
     let output_path = input.with_extension("jpg");
     img.save(&output_path).expect("Failed to save image");
