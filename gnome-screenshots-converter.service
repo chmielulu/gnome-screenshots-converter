@@ -1,0 +1,12 @@
+[Unit]
+Description=Converts screenshots to jpg
+After=network.target
+
+[Service]
+Type=simple
+User=jakub
+ExecStart=/usr/bin/gnome-screenshots-converter
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
